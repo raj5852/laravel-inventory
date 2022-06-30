@@ -16,6 +16,7 @@ Route::get('/', function () {
 })->middleware('guest')->name('login');
 
 Route::post('login', [LoginController::class, 'postLogin'])->name('loginpost');
+Route::get('logout', [LoginController::class, 'logout']);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');

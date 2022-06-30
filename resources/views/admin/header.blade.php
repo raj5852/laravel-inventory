@@ -6,7 +6,7 @@
         </div>
 
         <div class="top-navbar-right ms-auto">
-            <a href="#">Logout</a>
+            <a href="/logout">Logout</a>
         </div>
     </nav>
 </header>
