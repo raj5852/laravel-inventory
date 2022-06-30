@@ -6,6 +6,7 @@ use App\Models\Production;
 use App\Models\Productname;
 use Illuminate\Http\Request;
 use App\Models\Productstore;
+use PDF;
 
 class ProductinputController extends Controller
 {
@@ -20,6 +21,7 @@ class ProductinputController extends Controller
         }else{
             return "You have not any access";
         }
+
 
     }
 
@@ -36,7 +38,15 @@ class ProductinputController extends Controller
         $production->weight = $request->weight;
         $production->save();
 
-        return back()->with('success','Product stored successfully!');
-
+        // return back()->with('success','Product stored successfully!');
+        $data = [
+            'name'=> $request->product,
+            'size'=>$request->size,
+            'weight'=>$request->weight,
+            'qrcode'=>$productid,
+            'dateandtime'=>date("F j, Y, g:i a")
+        ];
+        $pdf = PDF::loadView('mypdf',$data)->setPaper([0,0,290,290], 'landscape');
+        return $pdf->stream();
     }
 }

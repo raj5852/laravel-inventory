@@ -16,10 +16,10 @@
                     <form action="/sale" method="POST">
                         @csrf
                         <label for=""><b>Customer : </b> </label>
-                        <select class="form-control" name="customer" id="">
+                        <select class="form-control" name="customerid" id="">
 
                             @foreach ($customers as $customer)
-                                <option value="{{ $customer->name }}">{{ $customer->name }}</option>
+                                <option value="{{ $customer->id }}">{{ $customer->name }}</option>
                             @endforeach
                         </select><br>
                         <input type="text" id="scan" class="form-control scan" placeholder="Scan QR code">
