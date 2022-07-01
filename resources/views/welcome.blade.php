@@ -36,6 +36,12 @@
                                     alt="">
                             </div>
                             <div class="col-lg-6">
+                                @if (session()->has('success'))
+                                <div class="alert alert-danger">
+                                    {{session()->get('success')}}
+                                </div>
+                                @endif
+
                                 <div class="card-body p-4 p-sm-5">
                                     <h5 class="card-title">Sign In</h5>
                                     <form class="form-body" method="POST" action="{{ route('loginpost') }}">

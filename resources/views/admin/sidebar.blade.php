@@ -12,14 +12,17 @@
       </div>
       <!--navigation-->
       <ul class="metismenu" id="menu">
-          <li>
-              <a href="{{ route('dashboard') }}">
-                  <div class="parent-icon"><i class="bi bi-house-fill"></i>
-                  </div>
-                  <div class="menu-title">Dashboard</div>
-              </a>
+          @if (request()->user()->hasAllPermissions(['stock']))
+              <li>
+                  <a href="{{ route('dashboard') }}">
+                      <div class="parent-icon"><i class="bi bi-house-fill"></i>
+                      </div>
+                      <div class="menu-title">Dashboard</div>
+                  </a>
 
-          </li>
+              </li>
+          @endif
+
           @if (request()->user()->hasAllPermissions(['product-input']))
               <li>
                   <a href="{{ route('productinput') }}">
