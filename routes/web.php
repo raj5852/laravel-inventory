@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductcreateController;
 use App\Http\Controllers\ProductinputController;
 use App\Http\Controllers\ProductsaleController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,6 +33,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('create-customer', [CreatecustomerName::class, 'index'])->name('createcustomer');
     Route::post('create-customer-post', [CreatecustomerName::class, 'post'])->name('createcustomerpost');
     Route::get('cus/{id}', [CreatecustomerName::class, 'delete']);
+    Route::get('view/{id}',[ViewController::class,'index']);
+    Route::get('form-search',[DashboardController::class,'search']);
 });
 
 //product-output

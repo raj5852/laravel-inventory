@@ -31,6 +31,16 @@
     <link href="{{ asset('assets/css/header-colors.css') }}" rel="stylesheet" />
     @yield('css')
     <title> Admin </title>
+    <style>
+        /* @media() */
+        /* @media screen and (min-width: 480px) { */
+
+        @media screen and (min-width: 780px) {
+            #middleimage {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>

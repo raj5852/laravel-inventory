@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Deliveryreport;
 use App\Models\Delvery;
 use Illuminate\Http\Request;
 use App\Models\Productstore;
+use GuzzleHttp\Promise\Create;
 use PDF;
 
 class ProductsaleController extends Controller
@@ -17,7 +19,6 @@ class ProductsaleController extends Controller
     {
         if (request()->user()->hasAllPermissions('product-output')) {
             $customers = Customer::all();
-
             return view('sale', compact('customers'));
         } else {
             return 'You have no access';
@@ -29,6 +30,7 @@ class ProductsaleController extends Controller
         $find =  Productstore::where('productid', $request->productname)->first();
         return response()->json($find);
     }
+
     function  sals(Request $request)
     {
         if (empty($request->id)) {
@@ -37,6 +39,7 @@ class ProductsaleController extends Controller
             // Productstore::destroy();
             $customername = Customer::find($request->customerid);
 
+
             $findMany = Productstore::findMany($request->id);
             $totalProductWeight = $findMany->sum('weight');
 
@@ -44,6 +47,20 @@ class ProductsaleController extends Controller
             $delvery->name = $customername->name;
             $delvery->weight = $totalProductWeight;
             $delvery->save();
+
+            // $productname = $data->productname;
+            // $weight = $data->weight;
+            foreach($findMany as $data){
+                Deliveryreport::create([
+                    'delverie_id'=> $delvery->id,
+                    'productname'=>$data->productname,
+                    'weigth'=>$data->weight,
+                    'size'=>$data->size
+                ]);
+            }
+            //  return $findMany;
+
+
             Productstore::destroy($request->id);
             // return back()->with('success', 'Product delivered successfully!');
             $data = [

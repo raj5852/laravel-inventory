@@ -28,71 +28,52 @@
         <!--start content-->
         <main class="authentication-content">
             <div class="container-fluid">
-                <div class="authentication-card">
-                    <div class="card shadow rounded-0 overflow-hidden">
-                        <div class="row g-0">
-                            <div class="col-lg-6 bg-login d-flex align-items-center justify-content-center">
-                                <img src="{{ asset('assets/images/login-img.jpg') }}" class="img-fluid"
-                                    alt="">
-                            </div>
-                            <div class="col-lg-6">
-                                @if (session()->has('success'))
-                                <div class="alert alert-danger">
-                                    {{session()->get('success')}}
-                                </div>
-                                @endif
+                <div class="authentication-card col-md-5">
+                    <div class="card card-body p-4 p-sm-5">
+                        <h5 class="card-title">Sign In</h5>
+                        <form class="form-body" method="POST" action="{{ route('loginpost') }}">
+                            @csrf
 
-                                <div class="card-body p-4 p-sm-5">
-                                    <h5 class="card-title">Sign In</h5>
-                                    <form class="form-body" method="POST" action="{{ route('loginpost') }}">
-                                        @csrf
+
+                                <div class="login-separater text-center mb-4">
+
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label for="inputEmailAddress" class="form-label">Email Address</label>
+                                        <div class="ms-auto position-relative">
+                                            <div class="position-absolute top-50 translate-middle-y search-icon px-3">
+                                                <i class="bi bi-envelope-fill"></i>
+                                            </div>
+                                            <input type="email" name="email" class="form-control radius-30 ps-5"
+                                                id="inputEmailAddress" placeholder="Email Address">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="inputChoosePassword" class="form-label">Enter
+                                            Password</label>
+                                        <div class="ms-auto position-relative">
+                                            <div class="position-absolute top-50 translate-middle-y search-icon px-3">
+                                                <i class="bi bi-lock-fill"></i>
+                                            </div>
+                                            <input type="password" name="password" class="form-control radius-30 ps-5"
+                                                id="inputChoosePassword" placeholder="Enter Password">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+
+                                    </div>
+                                    <div class="col-6 text-end">
+                                    </div>
+                                    <div class="col-12">
                                         <div class="d-grid">
-
+                                            <button type="submit" class="btn btn-primary radius-30">Sign
+                                                In</button>
                                         </div>
-                                        <div class="login-separater text-center mb-4">
-
-                                        </div>
-                                        <div class="row g-3">
-                                            <div class="col-12">
-                                                <label for="inputEmailAddress" class="form-label">Email Address</label>
-                                                <div class="ms-auto position-relative">
-                                                    <div
-                                                        class="position-absolute top-50 translate-middle-y search-icon px-3">
-                                                        <i class="bi bi-envelope-fill"></i>
-                                                    </div>
-                                                    <input type="email" name="email" class="form-control radius-30 ps-5"
-                                                        id="inputEmailAddress" placeholder="Email Address">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <label for="inputChoosePassword" class="form-label">Enter
-                                                    Password</label>
-                                                <div class="ms-auto position-relative">
-                                                    <div
-                                                        class="position-absolute top-50 translate-middle-y search-icon px-3">
-                                                        <i class="bi bi-lock-fill"></i>
-                                                    </div>
-                                                    <input type="password" name="password" class="form-control radius-30 ps-5"
-                                                        id="inputChoosePassword" placeholder="Enter Password">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-
-                                            </div>
-                                            <div class="col-6 text-end">
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="d-grid">
-                                                    <button type="submit" class="btn btn-primary radius-30">Sign
-                                                        In</button>
-                                                </div>
-                                            </div>
-                                           <br><br>
-                                        </div>
-                                    </form>
+                                    </div>
+                                    <br><br>
                                 </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
