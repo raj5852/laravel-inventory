@@ -37,4 +37,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('form-search',[DashboardController::class,'search']);
 });
 
-//product-output
+
