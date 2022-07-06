@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\API\LoginController;
+use App\Http\Controllers\API\ProductinputController;
+use App\Http\Controllers\API\ProductoutputController;
+use App\Http\Controllers\API\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +18,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+
+Route::post('login',[LoginController::class,'index']);
+
+Route::post('productinput',[ProductinputController::class,'index'])->middleware('auth:sanctum');
+Route::post('productname',[ProductinputController::class,'producctsnames'])->middleware('auth:sanctum');
+
+
+
+
+Route::post('customername',[ProductoutputController::class,'customername'])->middleware('auth:sanctum');
+Route::post('search',[ProductoutputController::class,'ajax'])->middleware('auth:sanctum');
+Route::post('save-print',[ProductoutputController::class,'sals'])->middleware('auth:sanctum');

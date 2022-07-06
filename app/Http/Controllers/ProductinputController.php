@@ -10,9 +10,6 @@ use PDF;
 
 class ProductinputController extends Controller
 {
-    //
-
-
 
     function index(){
         if(request()->user()->hasAllPermissions(['product-input'])){

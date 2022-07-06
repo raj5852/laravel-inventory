@@ -5,7 +5,7 @@
             <i class="bi bi-list"></i>
         </div>
         <div class="d-flex w-100 justify-content-center align-item-center">
-        <img id="middleimage"  src="http://127.0.0.1:8000/assets/images/logo-icon.png" style="width: 50px">
+        <img id="middleimage"  src="{{ asset('assets/images/logo-icon1.png') }}" style="width: 50px">
 
         </div>
         <div class="top-navbar-right ms-auto">

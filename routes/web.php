@@ -33,8 +33,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('create-customer', [CreatecustomerName::class, 'index'])->name('createcustomer');
     Route::post('create-customer-post', [CreatecustomerName::class, 'post'])->name('createcustomerpost');
     Route::get('cus/{id}', [CreatecustomerName::class, 'delete']);
-    Route::get('view/{id}',[ViewController::class,'index']);
-    Route::get('form-search',[DashboardController::class,'search']);
+    Route::get('view/{id}', [ViewController::class, 'index']);
+    Route::get('form-search', [DashboardController::class, 'search']);
 });
-
-
