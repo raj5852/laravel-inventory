@@ -21,13 +21,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('login',[LoginController::class,'index']);
-
-Route::post('productinput',[ProductinputController::class,'index'])->middleware('auth:sanctum');
-Route::post('productname',[ProductinputController::class,'producctsnames'])->middleware('auth:sanctum');
-
+Route::post('productinput',[ProductinputController::class,'index']);
+Route::post('productname',[ProductinputController::class,'producctsnames']);
 
 
 
-Route::post('customername',[ProductoutputController::class,'customername'])->middleware('auth:sanctum');
-Route::post('search',[ProductoutputController::class,'ajax'])->middleware('auth:sanctum');
-Route::post('save-print',[ProductoutputController::class,'sals'])->middleware('auth:sanctum');
+
+Route::post('customername',[ProductoutputController::class,'customername']);
+Route::post('search',[ProductoutputController::class,'ajax']);
+Route::post('save-print',[ProductoutputController::class,'sals']);

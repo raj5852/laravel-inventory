@@ -24,73 +24,64 @@ class ProductoutputController extends Controller
     }
     function customername()
     {
-        if (request()->user()->hasAllPermissions('product-output')) {
-            // $customers = Customer::all();
-            return response()->json(['data' => Customer::all()]);
-        } else {
-            return response()->json(['data' => 'you have no access']);
-        }
+
+
+        return response()->json(['data' => Customer::all()]);
     }
 
     function ajax(Request $request)
     {
-        if (request()->user()->hasAllPermissions('product-output')) {
 
-            $find =  Productstore::where('productid', $request->qrcodeid)->first();
-            if ($find) {
-                return response()->json(['data' => $find]);
-            }else{
-                return response()->json(['data' => 'No data found']);
-
-            }
+        $find =  Productstore::where('productid', $request->qrcodeid)->first();
+        if ($find) {
+            return response()->json(['data' => $find]);
         } else {
-            return response()->json(['data' =>  'You have no access']);
+            return response()->json(['data' => 'No data found']);
         }
     }
 
     function  sals(Request $request)
     {
-        if (request()->user()->hasAllPermissions('product-output')) {
-            if (empty($request->id)) {
-                return 'No Data Found';
-            } else {
-                // Productstore::destroy();
-                $customername = Customer::find($request->customerid);
+
+        if (empty($request->id)) {
+            return 'No Data Found';
+        } else {
+
+            $customername = Customer::find($request->customerid);
 
 
-                $findMany = Productstore::findMany($request->id);
-                $totalProductWeight = $findMany->sum('weight');
+            $findMany = Productstore::findMany($request->id);
+            $totalProductWeight = $findMany->sum('weight');
 
-                $delvery = new Delvery();
-                $delvery->name = $customername->name;
-                $delvery->weight = $totalProductWeight;
-                $delvery->save();
+            $delvery = new Delvery();
+            $delvery->name = $customername->name;
+            $delvery->weight = $totalProductWeight;
+            $delvery->save();
 
-                // $productname = $data->productname;
-                // $weight = $data->weight;
-                foreach ($findMany as $data) {
-                    Deliveryreport::create([
-                        'delverie_id' => $delvery->id,
-                        'productname' => $data->productname,
-                        'weigth' => $data->weight,
-                        'size' => $data->size
-                    ]);
-                }
-                //  return $findMany;
-
-
-                Productstore::destroy($request->id);
-                // return back()->with('success', 'Product delivered successfully!');
-                $data = [
-                    'name' => $customername->name,
-                    'address' => $customername->address,
-                    'products' => $findMany,
-                    'total' => $totalProductWeight,
-                    'dateandtime' => date("F j, Y, g:i a")
-
-                ];
-                return response()->json(['data' => $data]);
+            // $productname = $data->productname;
+            // $weight = $data->weight;
+            foreach ($findMany as $data) {
+                Deliveryreport::create([
+                    'delverie_id' => $delvery->id,
+                    'productname' => $data->productname,
+                    'weigth' => $data->weight,
+                    'size' => $data->size
+                ]);
             }
+            //  return $findMany;
+
+
+            Productstore::destroy($request->id);
+            // return back()->with('success', 'Product delivered successfully!');
+            $data = [
+                'name' => $customername->name,
+                'address' => $customername->address,
+                'products' => $findMany,
+                'total' => $totalProductWeight,
+                'dateandtime' => date("F j, Y, g:i a")
+
+            ];
+            return response()->json(['data' => $data]);
         }
     }
 }

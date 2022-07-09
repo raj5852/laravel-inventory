@@ -12,19 +12,24 @@ class LoginController extends Controller
     //
     function index(Request $request)
     {
-        if (!Auth::attempt($request->only('email', 'password'))) {
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = Auth::user();
+            $success['token'] =  $user->createToken('MyApp')->plainTextToken;
+            $success['id'] =  $user->id;
+            $success['name'] =  $user->name;
+            $success['email'] =  $user->email;
+
             return response()->json([
-                'message' => 'Invalid login details'
-            ], 401);
+
+                'message' => 'success',
+                'id'=>$success['id'],
+                'name'=>$success['name'],
+                'email'=>$success['email'],
+
+            ]);
+        } else {
+            return request()->json('Unauthorised.', ['message' => 'Unauthorised']);
         }
-
-        $user = User::where('email', $request['email'])->firstOrFail();
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-        ]);
     }
 }
